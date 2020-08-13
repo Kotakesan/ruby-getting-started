@@ -42,7 +42,7 @@ class LinebotController < ApplicationController
                longitude: event.message["longitude"]
              }
              client.reply_message(event["replyToken"], message)
-           end
+          
          end
        }
    
