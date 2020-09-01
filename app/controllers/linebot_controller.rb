@@ -40,9 +40,7 @@ class LinebotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          puts "Translateチェック"
           json = translate_uri event.message['text'], uri
-          puts "おわる"
           message = {
               type: 'text',
               text: json
@@ -58,6 +56,9 @@ class LinebotController < ApplicationController
   private
   def translate_uri translated, uri
     content = '[{"Text" : "' + translated + '"}]'
+    puts "tesut"
+    puts content
+    puts "test"
     request = Net::HTTP::Post.new(uri)
     request['Content-type'] = 'application/json'
     request['Content-length'] = content.length
