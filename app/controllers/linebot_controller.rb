@@ -42,13 +42,13 @@ class LinebotController < ApplicationController
           p results
           puts "test"
           results.each do |result|
-            puts result["detectedLanguage"]
+            puts result["translations"]
             puts result.class
           end
           puts"testo"
           message = {
               type: 'text',
-              text: result["translations"]
+              text: results["translations"]
           }
           client.reply_message(event['replyToken'], message)
         end
