@@ -40,7 +40,9 @@ class LinebotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
+          puts "Translateチェック"
           json = translate_uri event.message['text'], uri
+          puts "おわる"
           message = {
               type: 'text',
               text: json
