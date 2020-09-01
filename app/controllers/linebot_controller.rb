@@ -43,6 +43,7 @@ class LinebotController < ApplicationController
           puts "test"
           results.each do |result|
             puts result
+            puts result.class
           end
           puts"testo"
           message = {
