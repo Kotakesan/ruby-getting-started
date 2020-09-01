@@ -63,6 +63,9 @@ class LinebotController < ApplicationController
     request['X-ClientTraceId'] = SecureRandom.uuid
     request.body = content
     result = response.body.force_encoding("utf-8")
+    puts "testresult"
+    puts result
+    puts "owa"
     json = JSON.pretty_generate(JSON.parse(result))
     puts "テストです"
     puts json
