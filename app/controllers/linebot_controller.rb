@@ -31,7 +31,7 @@ class LinebotController < ApplicationController
     # response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
     #     http.request (request)
     # end
-
+    uri = URI.parse("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = uri.scheme === "https"
 
@@ -41,7 +41,7 @@ class LinebotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          json = translate_uri event.message['text']
+          json = translate_uri event.message['text'], uri
           message = {
               type: 'text',
               text: json
@@ -55,8 +55,7 @@ class LinebotController < ApplicationController
   end
 
   private
-  def translate_uri translated
-    uri = URI.parse("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en")
+  def translate_uri translated, uri
     content = '[{"Text" : "' + translated + '"}]'
     request = Net::HTTP::Post.new(uri)
     request['Content-type'] = 'application/json'
