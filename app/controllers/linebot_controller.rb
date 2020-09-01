@@ -38,9 +38,12 @@ class LinebotController < ApplicationController
         case event.type
         when Line::Bot::Event::MessageType::Text
           json = translate_uri event.message['text']
-          result = JSON.parse(json)
+          results = JSON.parse(json)
+          p results
           puts "test"
-          puts result[translations]
+          results.each do |result|
+            puts result
+          end
           puts"testo"
           message = {
               type: 'text',
