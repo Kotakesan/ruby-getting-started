@@ -42,7 +42,7 @@ class LinebotController < ApplicationController
           p results
           puts "test"
           results.each do |result|
-            puts result
+            puts result["detectedLanguage"]
             puts result.class
           end
           puts"testo"
