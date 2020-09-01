@@ -64,6 +64,9 @@ class LinebotController < ApplicationController
     request.body = content
     result = response.body.force_encoding("utf-8")
     json = JSON.pretty_generate(JSON.parse(result))
+    puts "テストです"
+    puts json
+    puts "てすとおわ"
     return json
   end
 end
