@@ -40,11 +40,11 @@ class LinebotController < ApplicationController
           json = translate_uri event.message['text']
           result = JSON.parse(json)
           puts "test"
-          puts result["translations"]["text"]
+          puts result["translations"]
           puts"testo"
           message = {
               type: 'text',
-              text: result["translations"]["text"]
+              text: result["translations"]
           }
           client.reply_message(event['replyToken'], message)
         end
