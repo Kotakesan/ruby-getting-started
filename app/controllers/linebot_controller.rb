@@ -23,7 +23,6 @@ class LinebotController < ApplicationController
       error 400 do 'Bad Request' end
     end
 
-    subscription_key = "12b164cec1be4fb0a61683ac16e71223"
     endpoint = "https://api.cognitive.microsofttranslator.com/"
     path = '/translate?api-version=3.0'
     params = '&to=en'
@@ -60,7 +59,7 @@ class LinebotController < ApplicationController
     request = Net::HTTP::Post.new(uri)
     request['Content-type'] = 'application/json'
     request['Content-length'] = content.length
-    request['Ocp-Apim-Subscription-Key'] = subscription_key
+    request['Ocp-Apim-Subscription-Key'] = "12b164cec1be4fb0a61683ac16e71223"
     request['X-ClientTraceId'] = SecureRandom.uuid
     request.body = content
     result = response.body.force_encoding("utf-8")
