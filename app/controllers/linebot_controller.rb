@@ -62,12 +62,11 @@ class LinebotController < ApplicationController
     request['Ocp-Apim-Subscription-Key'] = "12b164cec1be4fb0a61683ac16e71223"
     request['X-ClientTraceId'] = SecureRandom.uuid
     request.body = content
-    response = Net::HTTP.start(uri.host, uri.port) do |http|
-      http.get(uri.request_uri)
-    end    
-    puts "testresult"
-    puts response
-    puts "owa"
+    
+    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+        http.request (request)
+    end
+    result = response.body.force_encoding("utf-8")
     json = JSON.pretty_generate(JSON.parse(result))
     puts "テストです"
     puts json
