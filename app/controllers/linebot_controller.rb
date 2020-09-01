@@ -53,8 +53,8 @@ class LinebotController < ApplicationController
   private
   def translate_uri translated
     uri = URI.parse("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en")
-    http =  Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = uri.scheme === "https"
+    # http =  Net::HTTP.new(uri.host, uri.port)
+    # http.use_ssl = uri.scheme === "https"
     content = '[{"Text" : "' + translated + '"}]'
     request = Net::HTTP::Post.new(uri)
     request['Content-type'] = 'application/json'
@@ -62,9 +62,11 @@ class LinebotController < ApplicationController
     request['Ocp-Apim-Subscription-Key'] = "12b164cec1be4fb0a61683ac16e71223"
     request['X-ClientTraceId'] = SecureRandom.uuid
     request.body = content
-    result = response.body.force_encoding("utf-8")
+    response = Net::HTTP.start(uri.host, uri.port) do |http|
+      http.get(uri.request_uri)
+    end    
     puts "testresult"
-    puts result
+    puts response
     puts "owa"
     json = JSON.pretty_generate(JSON.parse(result))
     puts "テストです"
