@@ -40,7 +40,7 @@ class LinebotController < ApplicationController
           json = translate_uri event.message['text']
           message = {
               type: 'text',
-              text: json
+              text: json["translations"]["text"]
           }
           client.reply_message(event['replyToken'], message)
         end
@@ -68,9 +68,6 @@ class LinebotController < ApplicationController
     end
     result = response.body.force_encoding("utf-8")
     json = JSON.pretty_generate(JSON.parse(result))
-    puts "テストです"
-    puts json
-    puts "てすとおわ"
     return json
   end
 end
