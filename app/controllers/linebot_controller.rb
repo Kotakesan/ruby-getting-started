@@ -44,7 +44,7 @@ class LinebotController < ApplicationController
           puts"testo"
           message = {
               type: 'text',
-              text: result["translations"]
+              text: result[1]["text"]
           }
           client.reply_message(event['replyToken'], message)
         end
